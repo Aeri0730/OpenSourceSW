@@ -17,7 +17,7 @@ const CopyButton = ({ url }: CopyButtonType) => {
     }
 
     return (
-        <Button mb={5} onClick={() => { copyAndAlert(url) }}>
+        <Button w="full" mb={5} onClick={() => { copyAndAlert(url) }}>
             트리에 초대하기
         </Button>
     )

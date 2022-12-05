@@ -9,7 +9,7 @@ type DecorateButtonType = {
 
 const DecorateButton = ({ userId }: DecorateButtonType) => {
     return (
-        <Button mb={5}>장식품 달아주기</Button>
+        <Button size="lg" w="full" mb={5}>장식품 달아주기</Button>
     )
 }
 

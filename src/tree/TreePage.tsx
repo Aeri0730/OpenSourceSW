@@ -1,14 +1,12 @@
-import { Box, Container, Flex, SimpleGrid } from "@chakra-ui/react"
+import { Box, Container, Flex, Image } from "@chakra-ui/react"
 import { Navigate, useParams } from "react-router-dom";
 import { useWindowSize } from "../useWindowSize";
 
-// treeImage transparent
-
 import bgImage from "../assets/background-day.jpg";
-import treeImage from "../assets/tree2.svg"
 
 import TreeButton from "./TreeButton";
 import TreeHeader from "./TreeHeader";
+import TreeBody from "./TreeBody";
 
 const fakeUserResponse = {
     "isSuccess": true,
@@ -25,7 +23,7 @@ const fakeTreeResponse = {
     "isSuccess": true,
     "code": 200,
     "message": "성공",
-    "ownerNickname": "미미한미현",
+    "treeOwnerNickname": "미미한미현",
     "result": [
         {
             "idx": 1,
@@ -52,11 +50,11 @@ const TreePage = () => {
     }
 
     return (
-        <Box w={width} bgImage={bgImage} bgPos="center" bgSize="cover">
-            <Container textStyle="tree">
-                <Flex h={height} flexDirection="column" flexGrow={1}>
-                    <TreeHeader nickname={fakeTreeResponse.ownerNickname} count={fakeTreeResponse.result.length} />
-                    <Box flex={1} bgImage={treeImage} bgPos="bottom" bgSize="contain" bgRepeat="no-repeat" />
+        <Box h={height} bgImage={bgImage} bgPos="center" bgSize="cover">
+            <Container maxWidth="container.sm" h={height} maxW="container.xl" textStyle="tree">
+                <Flex h={height} direction="column">
+                    <TreeHeader nickname={fakeTreeResponse.treeOwnerNickname} count={fakeTreeResponse.result.length} />
+                    <TreeBody list={fakeTreeResponse.result} />
                     <TreeButton treeId={treeId} userId={fakeUserResponse.result.idx} />
                 </Flex>
             </Container>
