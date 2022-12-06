@@ -1,5 +1,6 @@
 import { extendTheme, ChakraProvider } from "@chakra-ui/react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import SignIn from "./account/SignIn"
 
 import ErrorPage from "./ErrorPage"
 import Fonts from "./Fonts"
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <></>,
         errorElement: <ErrorPage />
+    },
+    {
+        path: "signin",
+        element: <SignIn />
     },
     {
         path: "tree/:id",
