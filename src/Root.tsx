@@ -1,6 +1,6 @@
 import { extendTheme, ChakraProvider } from "@chakra-ui/react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import SignIn from "./account/SignIn"
+import Account, { AccountPageType } from "./account/Account"
 
 import ErrorPage from "./ErrorPage"
 import Fonts from "./Fonts"
@@ -28,7 +28,15 @@ const router = createBrowserRouter([
     },
     {
         path: "signin",
-        element: <SignIn />
+        element: <Account pageType="SignIn" />
+    },
+    {
+        path: "signup",
+        element: <Account pageType="SignUp" />
+    },
+    {
+        path: "checkmail",
+        element: <Account pageType="CheckMail" />
     },
     {
         path: "tree/:id",
