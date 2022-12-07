@@ -4,9 +4,19 @@ import Account, { AccountPageType } from "./account/Account"
 
 import ErrorPage from "./ErrorPage"
 import Fonts from "./Fonts"
+import Landing from "./Landing"
 import TreePage from "./tree/TreePage"
 
 const theme = extendTheme({
+    colors: {
+        brand: {
+            christmasTree: "#027228",
+            santaSock: "#D20001",
+            fallingSnow: "#F9FAFF",
+            nightSky: "#010317",
+            dawnSky: "#1B1D31",
+        }
+    },
     textStyles: {
         logo: {
             fontFamily: `"Tenada", sans-serif`
@@ -23,7 +33,7 @@ const theme = extendTheme({
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <></>,
+        element: <Landing />,
         errorElement: <ErrorPage />
     },
     {
