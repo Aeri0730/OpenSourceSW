@@ -1,8 +1,14 @@
 import { Center, Stack, Text } from "@chakra-ui/react"
 import { useWindowSize } from "../useWindowSize";
-import { CheckMailForm, SignInForm, SignUpForm } from "./SignForms";
 
-type PageType = "SignIn" | "SignUp" | "CheckMail"
+import AuthForm from "./AuthForm";
+import CodeForm from "./CodeForm";
+import EditForm from "./EditForm";
+import ResetForm from "./ResetForm";
+import SignInForm from "./SignInForm";
+import SignUpForm from "./SignUpForm";
+
+type PageType = "SignIn" | "Auth" | "Code" | "SignUp" | "Reset" | "Edit"
 
 export type AccountPageType = {
     pageType: PageType
@@ -19,8 +25,11 @@ const Account = ({ pageType }: AccountPageType) => {
                 </Center>
                 {
                     pageType === "SignIn" ? <SignInForm /> :
-                        pageType === "SignUp" ? <SignUpForm /> :
-                            <CheckMailForm />
+                        pageType === "Auth" ? <AuthForm /> :
+                            pageType === "Code" ? <CodeForm /> :
+                                pageType === "SignUp" ? <SignUpForm /> :
+                                    pageType === "Reset" ? <ResetForm /> :
+                                    <EditForm />
                 }
             </Stack>
         </Center>

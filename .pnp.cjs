@@ -48,6 +48,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-environment-jsdom", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:29.3.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:18.2.0"],\
+            ["react-hook-form", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:7.40.0"],\
             ["react-router-dom", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:6.4.4"],\
             ["ts-jest", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:29.0.3"],\
             ["ts-jest-resolver", "npm:2.0.0"],\
@@ -7927,6 +7928,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-environment-jsdom", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:29.3.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:18.2.0"],\
+            ["react-hook-form", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:7.40.0"],\
             ["react-router-dom", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:6.4.4"],\
             ["ts-jest", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:29.0.3"],\
             ["ts-jest-resolver", "npm:2.0.0"],\
@@ -10248,6 +10250,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-clientside-effect", "virtual:7203e503fbcdd1a45831cdb7b6b2db461f9520d63fd9b720f1bfb5656a70c3c6fde2bad40c051a87ac41a29a51ec0cd030277ae0b37f286202ea6197e92e0b5f#npm:1.2.6"],\
             ["use-callback-ref", "virtual:7203e503fbcdd1a45831cdb7b6b2db461f9520d63fd9b720f1bfb5656a70c3c6fde2bad40c051a87ac41a29a51ec0cd030277ae0b37f286202ea6197e92e0b5f#npm:1.3.0"],\
             ["use-sidecar", "virtual:7203e503fbcdd1a45831cdb7b6b2db461f9520d63fd9b720f1bfb5656a70c3c6fde2bad40c051a87ac41a29a51ec0cd030277ae0b37f286202ea6197e92e0b5f#npm:1.1.2"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-hook-form", [\
+        ["npm:7.40.0", {\
+          "packageLocation": "./.yarn/cache/react-hook-form-npm-7.40.0-760f91e47b-8187981c14.zip/node_modules/react-hook-form/",\
+          "packageDependencies": [\
+            ["react-hook-form", "npm:7.40.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:7.40.0", {\
+          "packageLocation": "./.yarn/__virtual__/react-hook-form-virtual-bcc2575133/0/cache/react-hook-form-npm-7.40.0-760f91e47b-8187981c14.zip/node_modules/react-hook-form/",\
+          "packageDependencies": [\
+            ["react-hook-form", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:7.40.0"],\
+            ["@types/react", "npm:18.0.25"],\
+            ["react", "npm:18.2.0"]\
           ],\
           "packagePeers": [\
             "@types/react",\

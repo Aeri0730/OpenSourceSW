@@ -41,12 +41,24 @@ const router = createBrowserRouter([
         element: <Account pageType="SignIn" />
     },
     {
+        path: "auth",
+        element: <Account pageType="Auth" />
+    },
+    {
+        path: "code",
+        element: <Account pageType="Code" />
+    },
+    {
         path: "signup",
         element: <Account pageType="SignUp" />
     },
     {
-        path: "checkmail",
-        element: <Account pageType="CheckMail" />
+        path: "reset",
+        element: <Account pageType="Reset" />
+    },
+    {
+        path: "edit",
+        element: <Account pageType="Edit" />
     },
     {
         path: "tree/:id",
