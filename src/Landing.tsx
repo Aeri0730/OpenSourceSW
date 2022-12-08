@@ -4,6 +4,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { useWindowSize } from "./useWindowSize"
 
 import decoratedTree from "./assets/decorated-tree.svg"
+import resourcesImage from "./assets/resources.svg"
 import wreathImage from "./assets/wreath.svg"
 
 const Landing = () => {
@@ -15,9 +16,9 @@ const Landing = () => {
                 <Text fontSize={["24px", "32px"]} textStyle="logo" color="brand.santaSock">GNU-MAS <Text as="span" color="brand.christmasTree">Tree</Text></Text>
             </Center>
             <Flex h={height} wrap="wrap" alignContent="center" alignItems="center" justifyContent="center" gap="5em" color="brand.fallingSnow" bgColor="brand.nightSky">
-                <Box boxSize={["xs", "sm"]}>
-                    <Image src={wreathImage} />
-                </Box>
+                <Center boxSize={["xs", "sm"]}>
+                    <Image w="85%" h="85%" src={wreathImage} />
+                </Center>
                 <VStack spacing="10">
                     <Text fontSize={["24px", "32px"]}>
                         특별한 날에만 전하는<br />말하지 못한 마음 속 이야기<br />학우들과 나누어보아요!
@@ -37,9 +38,9 @@ const Landing = () => {
                 </Box>
             </Flex>
             <Flex h={height} wrap="wrap" alignContent="center" alignItems="center" justifyContent="center" gap="5em" color="brand.fallingSnow" bgColor="brand.nightSky">
-                <Box boxSize={["xs", "sm"]}>
-                    <Image src={wreathImage} />
-                </Box>
+                <Center boxSize={["xs", "sm"]}>
+                    <Image w="85%" h="85%" src={resourcesImage} objectFit="contain" />
+                </Center>
                 <VStack spacing="10">
                     <Text fontSize={["24px", "32px"]}>
                         서비스 제작에 사용된<br />리소스들의 출처는<br />다음과 같습니다!
