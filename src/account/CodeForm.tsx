@@ -26,7 +26,7 @@ const CodeForm = () => {
                     <InputGroup size="lg">
                         <Input type="number" {...register("code", {
                         required: "인증번호를 입력해주세요",
-                        pattern: { value: /[0-9]{6}/, message: "인증번호는 6자리 숫자입니다" }
+                        pattern: { value: /^[0-9]{6}$/, message: "인증번호는 6자리 숫자입니다" }
                     })} value={code || ""} onChange={handleCodeInput} />
                     </InputGroup>
                     <FormErrorMessage>
