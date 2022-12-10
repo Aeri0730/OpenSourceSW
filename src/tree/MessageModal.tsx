@@ -1,11 +1,24 @@
 import { Button, Card, CardBody, CardFooter, CardHeader, Flex, Image, Modal, ModalBody, ModalContent, ModalFooter, ModalOverlay } from "@chakra-ui/react"
 
 import bgImage from "../assets/letter-background.jpg"
+import { UserResponse } from "./TreePage"
+
+const fakeUserResponse: UserResponse = {
+    "isSuccess": true,
+    "code": 200,
+    "message": "성공",
+    "result": {
+        "idx": 5,
+        "nickname": "도도한도도새",
+        "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo0LCJpYXQiOjE2NzAwNzQ4MzgsImV4cCI6MTcwMTYxMDgzOCwic3ViIjoidXNlciJ9.tDTdXR6nxTcR8AmXSznODyG0CvdEEJl4_bwqG1fXsEo"
+    }
+}
 
 type DecorationDetailType = {
-    idx: number,
-    nickname: string,
-    imageUrl: string,
+    idx: number
+    nickname: string
+    writerIdx: number
+    imageUrl: string
     message: string
 }
 
@@ -30,7 +43,14 @@ const MessageModal = ({ isOpen, onClose, detail }: MessageModalType) => {
                     </Card>
                 </ModalBody>
                 <ModalFooter>
-                    <Button w="full" mb={3} onClick={onClose}>닫기</Button>
+                    {
+                        fakeUserResponse.result.idx === detail.writerIdx ?
+                        <Flex w="full" direction="column">
+                            <Button mb={3} onClick={onClose}>삭제</Button>
+                            <Button mb={3} onClick={onClose}>닫기</Button>
+                        </Flex> :
+                            <Button w="full" mb={3} onClick={onClose}>닫기</Button>
+                    }
                 </ModalFooter>
             </ModalContent>
         </Modal>

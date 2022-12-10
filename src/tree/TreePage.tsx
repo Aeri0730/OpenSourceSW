@@ -9,7 +9,7 @@ import TreeInfo from "./TreeInfo";
 import TreeBody from "./TreeBody";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
-type UserResponse = {
+export type UserResponse = {
     isSuccess: boolean
     code: number
     message: string

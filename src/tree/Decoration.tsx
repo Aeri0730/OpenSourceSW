@@ -6,15 +6,13 @@ const fakeDecorationResult = {
     "isSuccess": true,
     "code": 200,
     "message": "성공",
-	"treeOwnerNickname": "테스트44",
-    "result": [
-        {
-            "idx": 1,
-            "nickname": "test1",
-            "imageUrl": "testImage1",
-            "message": "test메세지1"
-        }
-    ]
+    "result": {
+        "idx": 24,
+        "nickname": "하위",
+        "writerIdx": 5,
+        "imageUrl": "test1",
+        "message": "메세지"
+    }
 }
 
 export type DecorationType = {
@@ -30,7 +28,7 @@ const Decoration = ({ nickname, imageUrl }: DecorationType) => {
         <VStack>
             <IconButton aria-label="Decoration" bgColor="transparent" onClick={onOpen} icon={<Image boxSize={["40px", "60px"]} src={imageUrl} />} />
             <Text fontSize={["18px", "24px"]}>{nickname}</Text>
-            <MessageModal isOpen={isOpen} onClose={onClose} detail={fakeDecorationResult.result[0]} />
+            <MessageModal isOpen={isOpen} onClose={onClose} detail={fakeDecorationResult.result} />
         </VStack>
     )
 }
