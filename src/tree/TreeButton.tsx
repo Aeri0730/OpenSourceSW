@@ -1,3 +1,5 @@
+import { useAtomValue } from "jotai"
+import { userAtom } from "../backend/User"
 import CopyButton from "./CopyButton"
 import DecorateButton from "./DecorateButton"
 
@@ -7,8 +9,10 @@ type TreeButtonType = {
 }
 
 const TreeButton = ({ treeId, userId }: TreeButtonType) => {
+    const user = useAtomValue(userAtom);
+
     return (
-        treeId == userId ? <CopyButton url={window.location.href} /> : <DecorateButton userId={userId} />
+        treeId == user.userIdx ? <CopyButton url={window.location.href} /> : <DecorateButton />
     )
 }
 

@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, HStack, Image, Link, Spacer, Text, VStack } from "@chakra-ui/react"
+import { Box, Button, Center, Flex, Image, Link, Text, VStack } from "@chakra-ui/react"
 import { Link as RouterLink } from "react-router-dom";
 
 import { useWindowSize } from "./useWindowSize"
@@ -6,9 +6,13 @@ import { useWindowSize } from "./useWindowSize"
 import decoratedTree from "./assets/decorated-tree.svg"
 import resourcesImage from "./assets/resources.svg"
 import wreathImage from "./assets/wreath.svg"
+import { useAtom } from "jotai";
+import { userAtom } from "./backend/User";
 
 const Landing = () => {
     const { height } = useWindowSize();
+
+    const [user] = useAtom(userAtom);
 
     return (
         <Box textStyle="landing">
@@ -23,7 +27,10 @@ const Landing = () => {
                     <Text fontSize={["24px", "32px"]}>
                         특별한 날에만 전하는<br />말하지 못한 마음 속 이야기<br />학우들과 나누어보아요!
                     </Text>
-                    <Button as={RouterLink} to="signin" color="brand.nightSky" w="full">로그인해서 확인하기</Button>
+                    {
+                        user.userIdx === -1 ? <Button as={RouterLink} to="signin" color="brand.nightSky" w="full">로그인해서 확인하기</Button>
+                        : <Button as={RouterLink} to={`trees/${user.userIdx}`} color="brand.nightSky" w="full">내 트리 확인하기</Button>
+                    }
                 </VStack>
             </Flex>
             <Flex h={height} wrap="wrap" alignContent="center" alignItems="center" justifyContent="center" gap="5em" color="brand.fallingSnow" bgColor="brand.dawnSky">

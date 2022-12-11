@@ -1,7 +1,7 @@
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Button, Center, FormControl, FormErrorMessage, FormLabel, IconButton, Input, InputGroup, InputRightAddon, InputRightElement, Link, useToast } from "@chakra-ui/react";
 import { useAtom } from "jotai";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Form, Link as RouterLink, useNavigate } from "react-router-dom";
 

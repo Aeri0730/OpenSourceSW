@@ -130,3 +130,49 @@ export const signUp = async ( nickname: string, password: string ): Promise<APIR
 
     return json as APIResponse;
 }
+
+export interface EditSetUpResponse extends APIResponse {
+    result: string
+}
+
+export const setUpEdit = async (idx: number, jwt: string): Promise<EditSetUpResponse | undefined> => {
+    const config: RequestInit = {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json",
+            "x-access-token": jwt,
+        },
+        credentials: "include"
+    }
+
+    const response = await fetch(`${url}/users/edit/${idx}`, config);
+
+    const json = await response.json();
+
+    return json as EditSetUpResponse;
+}
+
+export const editUser = async (idx: number, jwt: string, nickname: string, password: string): Promise<APIResponse | undefined> => {
+    const body = {
+        nickname: nickname,
+        password: password
+    }
+
+    const config: RequestInit = {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json",
+            "x-access-token": jwt,
+        },
+        credentials: "include",
+        body: JSON.stringify(body)
+    }
+
+    const response = await fetch(`${url}/users/edit/${idx}`, config);
+
+    const json = await response.json();
+
+    return json as APIResponse;
+}

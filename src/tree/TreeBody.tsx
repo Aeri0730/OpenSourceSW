@@ -84,8 +84,8 @@ const TreeBody = ({ decorations }: TreeBodyType) => {
                 </Flex>
                 <Card as={Flex} fontSize={["16px", "20px"]} bgColor="whiteAlpha.800" direction="row">
                     {
-                        range(paginator.length, 1).map(
-                            item => item === pageIndex ? <Text key={item} fontWeight="bold" color="brand.santaSock" px={3} py={1}>{item}</Text> :
+                        range(paginator.length, 0).map(
+                            item => item === pageIndex ? <Text key={item} fontWeight="bold" color="brand.santaSock" px={3} py={1}>{item + 1}</Text> :
                                 <Text key={item} px={3} py={1}>{item + 1}</Text>
                         )
                     }

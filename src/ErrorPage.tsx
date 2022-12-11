@@ -13,7 +13,7 @@ const ErrorPage = () => {
                 <VStack gap={50}>
                     <CloseIcon boxSize="256px" />
                     <>
-                        <Heading as="h2">{error.data}</Heading>
+                        <Heading as="h2">URL 오류입니다.</Heading>
                         <Text>HTTP Code {error.status}</Text>
                     </>
                 </VStack>

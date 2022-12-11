@@ -58,7 +58,7 @@ const router = createBrowserRouter([
         element: <Account pageType="Reset" />
     },
     {
-        path: "edit",
+        path: "edit/:index",
         element: <Account pageType="Edit" />
     },
     {

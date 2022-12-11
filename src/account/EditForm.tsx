@@ -1,31 +1,104 @@
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { Button, FormControl, FormErrorMessage, FormLabel, IconButton, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
-import { useState } from "react";
+import { Button, FormControl, FormErrorMessage, FormLabel, IconButton, Input, InputGroup, InputRightElement, useToast } from "@chakra-ui/react";
+import { useAtomValue } from "jotai";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Form } from "react-router-dom";
+import { Form, Navigate, useNavigate, useParams } from "react-router-dom";
+import { editUser, setUpEdit } from "../backend/Backend";
+import { userAtom } from "../backend/User";
 
 type EditFormType = {
     nickname: string,
     password: string
 }
 
-const fakeUserData = {
-    result: "홍길동"
-}
-
 const EditForm = () => {
-    const [nickname, setNickname] = useState(fakeUserData.result);
+    const [nickname, setNickname] = useState("");
     const [password, setPassword] = useState("");
-    
+
     const handleNicknameInput = (e: React.ChangeEvent<HTMLInputElement>) => setNickname(e.target.value);
     const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
-    
-    const { handleSubmit, register, formState: { errors } } = useForm<EditFormType>();
 
-    const onSubmit = handleSubmit(data => alert(JSON.stringify(data)));
+    const user = useAtomValue(userAtom);
+
+    const toast = useToast();
+
+    const { handleSubmit, reset, register, formState: { errors } } = useForm<EditFormType>();
+
+    const navigate = useNavigate();
+
+    const onSubmit = handleSubmit(async data => {
+        try {
+            const editResponse = await editUser(user.userIdx, user.jwt, data.nickname, data.password);
+
+            if (editResponse?.isSuccess) {
+                navigate(`/trees/${user.userIdx}`, { replace: true });
+            }
+            else {
+                toast({
+                    title: "회원 정보 수정 실패",
+                    description: editResponse?.message,
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true
+                });
+            }
+        }
+        catch (error) {
+            toast({
+                title: "회원 정보 수정 실패",
+                description: "알 수 없는 오류입니다.",
+                status: "error",
+                duration: 3000,
+                isClosable: true
+            });
+        }
+    });
+
+    const { index } = useParams();
+
+    const userId = parseInt(index as string);
+
+    if (isNaN(userId)) {
+        console.log("올바르지 않은 URL입니다.");
+        return <Navigate replace to="/edit" />
+    }
+
+    useEffect(() => {
+        const getEditData = async () => {
+            try {
+                const res = await setUpEdit(user.userIdx, user.jwt);
+
+                if (res?.isSuccess) {
+                    setNickname(res.result);
+                    reset({nickname: res.result});
+                }
+                else {
+                    toast({
+                        title: "닉네임 획득 실패",
+                        description: res?.message,
+                        status: "error",
+                        duration: 3000,
+                        isClosable: true
+                    });
+                }
+            }
+            catch (error) {
+                toast({
+                    title: "닉네임 획득 실패",
+                    description: "알 수 없는 오류입니다.",
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true
+                });
+            }
+        }
+        
+        getEditData();
+    }, [nickname]);
 
     return (
         <Form method="post" action="" onSubmit={onSubmit}>
@@ -55,7 +128,7 @@ const EditForm = () => {
                     {errors.password && errors.password.message}
                 </FormErrorMessage>
             </FormControl>
-            <Button type="submit" size="lg" width="full" marginY="5" color="black">회원가입</Button>
+            <Button type="submit" size="lg" width="full" marginY="5" color="black">정보 수정</Button>
         </Form>
     )
 }

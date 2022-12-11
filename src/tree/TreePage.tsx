@@ -1,6 +1,5 @@
 import { Box, Container, Flex, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer, Text } from "@chakra-ui/react"
-import { useAtomValue } from "jotai"
-import { useAtomDevtools } from "jotai/devtools";
+import { useAtomValue, useSetAtom } from "jotai"
 import { Link, Navigate, useLoaderData, useParams } from "react-router-dom";
 import { useWindowSize } from "../useWindowSize";
 
@@ -11,23 +10,25 @@ import TreeInfo from "./TreeInfo";
 import TreeBody from "./TreeBody";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { userAtom } from "../backend/User";
-import { Decoration, Tree } from "../backend/Tree";
-import { useEffect } from "react";
+import { Tree } from "../backend/Tree";
 
 const TreePage = () => {
     const { width, height } = useWindowSize();
     const { index } = useParams();
 
     const user = useAtomValue(userAtom);
-    useAtomDevtools(userAtom);
+    const setUser = useSetAtom(userAtom);
 
     const tree = useLoaderData() as Tree;
-
     const treeId = parseInt(index as string);
 
     if (isNaN(treeId)) {
-        console.log("Failed");
+        console.log("올바르지 않은 URL입니다.");
         return <Navigate replace to="/trees" />
+    }
+
+    const onLogOut = () => {
+        setUser({ userIdx: -1, jwt: "" });
     }
 
     return (
@@ -46,8 +47,8 @@ const TreePage = () => {
                                     </MenuItem>
                                 </MenuList> :
                                 <MenuList textStyle="landing">
-                                    <MenuItem>로그아웃</MenuItem>
-                                    <MenuItem as={Link} to="/edit" style={{ textDecoration: "none" }}>정보 관리</MenuItem>
+                                    <MenuItem onClick={onLogOut}>로그아웃</MenuItem>
+                                    <MenuItem as={Link} to={`/edit/${user.userIdx}`} style={{ textDecoration: "none" }}>정보 관리</MenuItem>
                                 </MenuList>
                         }
                     </Menu>
@@ -57,10 +58,7 @@ const TreePage = () => {
                         <TreeInfo nickname={tree.treeOwnerNickname} count={tree.decorations.length} />
                         <Spacer />
                         <TreeBody decorations={tree.decorations} />
-                        {
-                            user ? <TreeButton treeId={treeId} userId={user.userIdx} /> :
-                            <TreeButton treeId={treeId} />
-                        }
+                        <TreeButton treeId={treeId} />
                     </Flex>
                 </Container>
             </Flex>
