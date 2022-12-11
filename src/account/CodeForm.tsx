@@ -1,7 +1,8 @@
-import { Button, Center, FormControl, FormErrorMessage, FormLabel, Input, InputGroup, Text } from "@chakra-ui/react"
+import { Button, Center, FormControl, FormErrorMessage, FormLabel, Input, InputGroup, Text, useToast } from "@chakra-ui/react"
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Form } from "react-router-dom"
+import { Form, useNavigate } from "react-router-dom"
+import { checkCode } from "../backend/Backend";
 
 type CodeFormType = {
     code: number
@@ -13,7 +14,37 @@ const CodeForm = () => {
 
     const { handleSubmit, register, formState: { errors } } = useForm<CodeFormType>();
 
-    const onSubmit = handleSubmit(data => alert(JSON.stringify(data)));
+    const navigate = useNavigate();
+
+    const toast = useToast();
+
+    const onSubmit = handleSubmit(async data => {
+        try {
+            const codeResponse = await checkCode(data.code);
+
+            if (codeResponse?.isSuccess) {
+                navigate("/signup", { replace: true });
+            }
+            else {
+                toast({
+                    title: "인증번호 인증 실패",
+                    description: codeResponse?.message,
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true
+                });
+            }
+        }
+        catch (error) {
+            toast({
+                title: "인증번호 인증 실패",
+                description: "알 수 없는 오류입니다.",
+                status: "error",
+                duration: 3000,
+                isClosable: true
+            });
+        }
+    });
 
     return (
         <>

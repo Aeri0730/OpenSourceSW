@@ -1,6 +1,7 @@
 import { extendTheme, ChakraProvider } from "@chakra-ui/react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import Account, { AccountPageType } from "./account/Account"
+import Account from "./account/Account"
+import { treeLoader } from "./backend/Tree"
 
 import ErrorPage from "./ErrorPage"
 import Fonts from "./Fonts"
@@ -61,8 +62,10 @@ const router = createBrowserRouter([
         element: <Account pageType="Edit" />
     },
     {
-        path: "tree/:id",
-        element: <TreePage />
+        path: "trees/:index",
+        element: <TreePage />,
+        loader: treeLoader,
+        errorElement: <ErrorPage />
     }
 ])
 

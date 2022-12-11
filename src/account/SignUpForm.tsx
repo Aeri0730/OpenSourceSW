@@ -1,8 +1,9 @@
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { Button, FormControl, FormErrorMessage, FormLabel, IconButton, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { Button, FormControl, FormErrorMessage, FormLabel, IconButton, Input, InputGroup, InputRightElement, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
+import { signUp } from "../backend/Backend";
 
 type SignUpFormData = {
     nickname: string,
@@ -21,7 +22,45 @@ const SignUpForm = () => {
     
     const { handleSubmit, register, formState: { errors } } = useForm<SignUpFormData>();
 
-    const onSubmit = handleSubmit(data => alert(JSON.stringify(data)));
+    const navigate = useNavigate();
+
+    const toast = useToast();
+
+    const onSubmit = handleSubmit(async data => {
+        try {
+            const signUpResponse = await signUp(data.nickname, data.password);
+
+            if (signUpResponse?.isSuccess) {
+                toast({
+                    title: "회원가입 성공",
+                    description: "가입하신 정보로 로그인해주세요.",
+                    status: "success",
+                    duration: 3000,
+                    isClosable: true
+                });
+
+                navigate("/", { replace: true });
+            }
+            else {
+                toast({
+                    title: "회원가입 실패",
+                    description: signUpResponse?.message,
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true
+                });
+            }
+        }
+        catch (error) {
+            toast({
+                title: "회원가입 실패",
+                description: "알 수 없는 오류입니다.",
+                status: "error",
+                duration: 3000,
+                isClosable: true
+            });
+        }
+    });
 
     return (
         <Form method="post" action="" onSubmit={onSubmit}>
