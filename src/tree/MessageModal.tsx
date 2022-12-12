@@ -1,24 +1,16 @@
-import { Button, Card, CardBody, CardFooter, CardHeader, Flex, Image, Modal, ModalBody, ModalContent, ModalFooter, ModalOverlay } from "@chakra-ui/react"
+import { Button, Card, CardBody, CardFooter, CardHeader, chakra, Flex, Image, Modal, ModalBody, ModalContent, ModalFooter, ModalOverlay } from "@chakra-ui/react"
+import { isValidMotionProp, motion, useTransform } from "framer-motion"
+import { useAtomValue } from "jotai"
 
 import bgImage from "../assets/letter-background.jpg"
-import { UserResponse } from "./TreePage"
+import { userAtom } from "../backend/User"
+import { ornament } from "../utils/ornaments"
 
-const fakeUserResponse: UserResponse = {
-    "isSuccess": true,
-    "code": 200,
-    "message": "성공",
-    "result": {
-        "idx": 5,
-        "nickname": "도도한도도새",
-        "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo0LCJpYXQiOjE2NzAwNzQ4MzgsImV4cCI6MTcwMTYxMDgzOCwic3ViIjoidXNlciJ9.tDTdXR6nxTcR8AmXSznODyG0CvdEEJl4_bwqG1fXsEo"
-    }
-}
-
-type DecorationDetailType = {
+export type DecorationDetailType = {
     idx: number
     nickname: string
     writerIdx: number
-    imageUrl: string
+    imageIdx: number
     message: string
 }
 
@@ -29,14 +21,18 @@ type MessageModalType = {
 }
 
 const MessageModal = ({ isOpen, onClose, detail }: MessageModalType) => {
+    const user = useAtomValue(userAtom);
+
+    console.log(detail);
+
     return (
-        <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <Modal isOpen={isOpen} onClose={onClose} motionPreset="slideInBottom" isCentered>
             <ModalOverlay />
-            <ModalContent h="50%" textStyle="tree" fontSize={["20px", "24px"]} bgImage={bgImage} bgPos="30%">
+            <ModalContent h="75%" textStyle="tree" fontSize={["20px", "24px"]} bgImage={bgImage} bgPos="30%">
                 <ModalBody flexDirection="column" overflowX="hidden">
                     <Card minH="90%" bgColor="whiteAlpha.800" mt={5} p={5}>
                         <CardHeader alignSelf="center">
-                            <Image src={detail.imageUrl} boxSize={["52px", "64px"]} />
+                            <Image src={ornament(detail.imageIdx)} boxSize={["52px", "64px"]} />
                         </CardHeader>
                         <CardBody>{detail.message}</CardBody>
                         <CardFooter justify="right">- {detail.nickname}</CardFooter>
@@ -44,7 +40,7 @@ const MessageModal = ({ isOpen, onClose, detail }: MessageModalType) => {
                 </ModalBody>
                 <ModalFooter>
                     {
-                        fakeUserResponse.result.idx === detail.writerIdx ?
+                        user.userIdx === detail.writerIdx ?
                         <Flex w="full" direction="column">
                             <Button mb={3} onClick={onClose}>삭제</Button>
                             <Button mb={3} onClick={onClose}>닫기</Button>

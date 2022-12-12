@@ -98,7 +98,7 @@ const EditForm = () => {
         }
         
         getEditData();
-    }, [nickname]);
+    }, []);
 
     return (
         <Form method="post" action="" onSubmit={onSubmit}>

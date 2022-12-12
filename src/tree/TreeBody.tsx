@@ -6,8 +6,7 @@ import treeImage from "../assets/tree.svg"
 import { useWindowSize } from "../useWindowSize"
 import { useMemo, useState } from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
-
-const range = (x: number, startAt: number) => [...Array(x).keys()].map(i => i + startAt);
+import { range } from "../utils/utils";
 
 interface Paginator {
     length: number
@@ -50,6 +49,7 @@ const decorate = (input: DecorationType[], height: number): Decorated => {
 }
 
 type TreeBodyType = {
+    treeIdx: number
     decorations: DecorationType[]
 }
 
@@ -77,7 +77,7 @@ const TreeBody = ({ decorations }: TreeBodyType) => {
                     {
                         decorate(paginator.page(pageIndex), paginator.height).lines.map((value, index) => (
                             <HStack key={index} justify="center" spacing={7}>
-                                {value.map(item => <Decoration key={item.idx} idx={item.idx} imageUrl={item.imageUrl} nickname={item.nickname} />)}
+                                {value.map(item => <Decoration key={item.idx} idx={item.idx} imageIdx={item.imageIdx} nickname={item.nickname} />)}
                             </HStack>
                         ))
                     }

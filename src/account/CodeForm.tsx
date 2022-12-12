@@ -23,7 +23,12 @@ const CodeForm = () => {
             const codeResponse = await checkCode(data.code);
 
             if (codeResponse?.isSuccess) {
-                navigate("/signup", { replace: true });
+                if (codeResponse.result) {
+                    navigate("/reset", { replace: true });
+                }
+                else {
+                    navigate("/signup", { replace: true });
+                }
             }
             else {
                 toast({

@@ -5,7 +5,7 @@ import { fetchTree, TreeResponse } from "./Backend";
 export interface Decoration {
     idx: number
     nickname: string
-    imageUrl: string
+    imageIdx: number
 }
 
 export interface Tree {
@@ -39,3 +39,10 @@ export const treeLoader = async ({ params }: LoaderFunctionArgs) => {
         throw error;
     }
 }
+
+export const treeIdxAtom = atom<number>(-1);
+
+export const decoAtom = atom<number>(0);
+export const decoTypeAtom = atom<number>(0);
+export const decoMessageAtom = atom<string>("");
+export const decoNicknameAtom = atom<string>("");

@@ -8,7 +8,7 @@ type TreeButtonType = {
     userId?: number
 }
 
-const TreeButton = ({ treeId, userId }: TreeButtonType) => {
+const TreeButton = ({ treeId }: TreeButtonType) => {
     const user = useAtomValue(userAtom);
 
     return (
