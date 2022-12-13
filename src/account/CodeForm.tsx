@@ -1,7 +1,8 @@
-import { Button, Center, FormControl, FormErrorMessage, FormLabel, Input, InputGroup, Text } from "@chakra-ui/react"
+import { Button, Center, FormControl, FormErrorMessage, FormLabel, Input, InputGroup, Text, useToast } from "@chakra-ui/react"
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Form } from "react-router-dom"
+import { Form, useNavigate } from "react-router-dom"
+import { checkCode } from "../backend/Backend";
 
 type CodeFormType = {
     code: number
@@ -11,9 +12,44 @@ const CodeForm = () => {
     const [code, setCode] = useState("");
     const handleCodeInput = (e: React.ChangeEvent<HTMLInputElement>) => setCode(e.target.value);
 
-    const { handleSubmit, register, formState: { errors } } = useForm<CodeFormType>();
+    const { handleSubmit, register, formState: { errors, isSubmitting } } = useForm<CodeFormType>();
 
-    const onSubmit = handleSubmit(data => alert(JSON.stringify(data)));
+    const navigate = useNavigate();
+
+    const toast = useToast();
+
+    const onSubmit = handleSubmit(async data => {
+        try {
+            const codeResponse = await checkCode(data.code);
+
+            if (codeResponse?.isSuccess) {
+                if (codeResponse.result) {
+                    navigate("/reset", { replace: true });
+                }
+                else {
+                    navigate("/signup", { replace: true });
+                }
+            }
+            else {
+                toast({
+                    title: "인증번호 인증 실패",
+                    description: codeResponse?.message,
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true
+                });
+            }
+        }
+        catch (error) {
+            toast({
+                title: "인증번호 인증 실패",
+                description: "알 수 없는 오류입니다.",
+                status: "error",
+                duration: 3000,
+                isClosable: true
+            });
+        }
+    });
 
     return (
         <>
@@ -33,7 +69,7 @@ const CodeForm = () => {
                         {errors.code && errors.code.message}
                     </FormErrorMessage>
                 </FormControl>
-                <Button type="submit" size="lg" width="full" marginY="5" color="black">인증번호 확인</Button>
+                <Button isLoading={isSubmitting} type="submit" size="lg" width="full" marginY="5" color="black">인증번호 확인</Button>
             </Form>
         </>
     )

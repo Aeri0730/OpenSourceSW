@@ -46,6 +46,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["identity-obj-proxy", "npm:3.0.0"],\
             ["jest", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:29.3.1"],\
             ["jest-environment-jsdom", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:29.3.1"],\
+            ["jotai", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:1.11.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:18.2.0"],\
             ["react-hook-form", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:7.40.0"],\
@@ -7926,6 +7927,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["identity-obj-proxy", "npm:3.0.0"],\
             ["jest", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:29.3.1"],\
             ["jest-environment-jsdom", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:29.3.1"],\
+            ["jotai", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:1.11.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:18.2.0"],\
             ["react-hook-form", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:7.40.0"],\
@@ -9198,6 +9200,68 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-util", "npm:29.3.1"],\
             ["merge-stream", "npm:2.0.0"],\
             ["supports-color", "npm:8.1.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["jotai", [\
+        ["npm:1.11.1", {\
+          "packageLocation": "./.yarn/cache/jotai-npm-1.11.1-ff36578085-a311aa2d91.zip/node_modules/jotai/",\
+          "packageDependencies": [\
+            ["jotai", "npm:1.11.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:1.11.1", {\
+          "packageLocation": "./.yarn/__virtual__/jotai-virtual-ca01a74595/0/cache/jotai-npm-1.11.1-ff36578085-a311aa2d91.zip/node_modules/jotai/",\
+          "packageDependencies": [\
+            ["jotai", "virtual:339228715fa103cea61a3f35b1d60c17f39f12e7428bacc75ef2d8b1dfdf0a04d21668b5dd4f1de21c3cfa2c5bc3dbee701114ccc08453ed5a9431968fdf9a4f#npm:1.11.1"],\
+            ["@babel/core", "npm:7.20.5"],\
+            ["@babel/template", null],\
+            ["@types/babel__core", null],\
+            ["@types/babel__template", null],\
+            ["@types/jotai-immer", null],\
+            ["@types/jotai-optics", null],\
+            ["@types/jotai-redux", null],\
+            ["@types/jotai-tanstack-query", null],\
+            ["@types/jotai-urql", null],\
+            ["@types/jotai-valtio", null],\
+            ["@types/jotai-xstate", null],\
+            ["@types/jotai-zustand", null],\
+            ["@types/react", "npm:18.0.25"],\
+            ["jotai-immer", null],\
+            ["jotai-optics", null],\
+            ["jotai-redux", null],\
+            ["jotai-tanstack-query", null],\
+            ["jotai-urql", null],\
+            ["jotai-valtio", null],\
+            ["jotai-xstate", null],\
+            ["jotai-zustand", null],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@babel/core",\
+            "@babel/template",\
+            "@types/babel__core",\
+            "@types/babel__template",\
+            "@types/jotai-immer",\
+            "@types/jotai-optics",\
+            "@types/jotai-redux",\
+            "@types/jotai-tanstack-query",\
+            "@types/jotai-urql",\
+            "@types/jotai-valtio",\
+            "@types/jotai-xstate",\
+            "@types/jotai-zustand",\
+            "@types/react",\
+            "jotai-immer",\
+            "jotai-optics",\
+            "jotai-redux",\
+            "jotai-tanstack-query",\
+            "jotai-urql",\
+            "jotai-valtio",\
+            "jotai-xstate",\
+            "jotai-zustand",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\

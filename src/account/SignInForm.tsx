@@ -1,40 +1,80 @@
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { Button, Center, FormControl, FormErrorMessage, FormLabel, IconButton, Input, InputGroup, InputRightAddon, InputRightElement, Link } from "@chakra-ui/react"
+import { Button, Center, FormControl, FormErrorMessage, FormLabel, IconButton, Input, InputGroup, InputRightAddon, InputRightElement, Link, useToast } from "@chakra-ui/react";
+import { useAtom } from "jotai";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Form, Link as RouterLink } from "react-router-dom"
+import { Form, Link as RouterLink, useNavigate } from "react-router-dom";
 
-type SignInFormData = {
-    email: string,
+import { fetchUser } from "../backend/Backend";
+import { userAtom } from "../backend/User";
+
+export type SignInFormData = {
+    id: string
     password: string
 }
 
 const SignInForm = () => {
-    const [email, setEmail] = useState("");
+    const [id, setId] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
+    const handleIdInput = (e: React.ChangeEvent<HTMLInputElement>) => setId(e.target.value);
     const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
 
-    const { handleSubmit, register, formState: { errors } } = useForm<SignInFormData>();
+    const { handleSubmit, register, formState: { errors, isSubmitting } } = useForm<SignInFormData>();
 
-    const onSubmit = handleSubmit(data => alert(JSON.stringify(data)));
+    const navigate = useNavigate();
+
+    const toast = useToast();
+
+    const [, setUser] = useAtom(userAtom);
+
+    const onSubmit = handleSubmit(async data => {
+        try {
+            const userResponse = await fetchUser(data.id, data.password);
+
+            if (userResponse?.isSuccess) {
+                const userData = userResponse.result;
+                
+                setUser(userData);
+                
+                navigate(`/trees/${userData.userIdx}`, { replace: true });
+            }
+            else {
+                toast({
+                    title: "로그인 실패",
+                    description: "아이디 또는 비밀번호가 올바르지 않습니다.",
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true
+                });
+            }
+        }
+        catch (error) {
+            toast({
+                title: "로그인 실패",
+                description: "알 수 없는 오류입니다.",
+                status: "error",
+                duration: 3000,
+                isClosable: true
+            });
+        }
+    });
 
     return (
-        <Form method="post" action="" onSubmit={onSubmit}>
-            <FormControl marginY="5" isInvalid={Boolean(errors.email)}>
-                <FormLabel htmlFor="email">학교 이메일 아이디</FormLabel>
+        <Form method="post" onSubmit={onSubmit}>
+            <FormControl marginY="5" isInvalid={Boolean(errors.id)}>
+                <FormLabel htmlFor="id">학교 이메일 아이디</FormLabel>
                 <InputGroup size="lg">
-                    <Input type="text" {...register("email", {
+                    <Input type="text" {...register("id", {
                         required: "이메일은 꼭 입력해주세요"
-                    })} value={email || ""} onChange={handleEmailInput} />
+                    })} value={id || ""} onChange={handleIdInput} />
                     <InputRightAddon color="black">@gnu.ac.kr</InputRightAddon>
                 </InputGroup>
                 <FormErrorMessage>
-                    {errors.email && errors.email.message}
+                    {errors.id && errors.id.message}
                 </FormErrorMessage>
             </FormControl>
             <FormControl marginY="5" isInvalid={Boolean(errors.password)}>
@@ -51,9 +91,9 @@ const SignInForm = () => {
                     {errors.password && errors.password.message}
                 </FormErrorMessage>
             </FormControl>
-            <Button type="submit" size="lg" width="full" marginY="5" color="black">로그인</Button>
+            <Button isLoading={isSubmitting} type="submit" size="lg" width="full" marginY="5" color="black">로그인</Button>
             <Center>
-                <Link as={RouterLink} fontSize="16px" color="whiteAlpha.700" to="/auth">계정을 찾을 수 없나요?</Link>
+                <Link as={RouterLink} fontSize="16px" color="whiteAlpha.700" style={{ textDecoration: "none" }} to="/auth">회원가입 또는 계정 찾기</Link>
             </Center>
         </Form>
     )

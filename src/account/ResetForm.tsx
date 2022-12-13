@@ -1,8 +1,9 @@
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { Button, FormControl, FormErrorMessage, FormLabel, IconButton, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { Button, FormControl, FormErrorMessage, FormLabel, IconButton, Input, InputGroup, InputRightElement, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
+import { resetPassword } from "../backend/Backend";
 
 type ResetFormType = {
     password: string
@@ -15,9 +16,47 @@ const ResetForm = () => {
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
 
-    const { handleSubmit, register, formState: { errors } } = useForm<ResetFormType>();
+    const { handleSubmit, register, formState: { errors, isSubmitting } } = useForm<ResetFormType>();
 
-    const onSubmit = handleSubmit(data => alert(JSON.stringify(data)));
+    const navigate = useNavigate();
+
+    const toast = useToast();
+
+    const onSubmit = handleSubmit(async data => {
+        try {
+            const resetResponse = await resetPassword(password);
+
+            if (resetResponse?.isSuccess) {
+                toast({
+                    title: "비밀번호 재설정 성공",
+                    description: "재설정하신 비밀번호로 로그인해주세요.",
+                    status: "success",
+                    duration: 3000,
+                    isClosable: true
+                });
+
+                navigate("/", { replace: true });
+            }
+            else {
+                toast({
+                    title: "비밀번호 재설정 실패",
+                    description: resetResponse?.message,
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true
+                });
+            }
+        }
+        catch (error) {
+            toast({
+                title: "회원 정보 수정 실패",
+                description: "알 수 없는 오류입니다.",
+                status: "error",
+                duration: 3000,
+                isClosable: true
+            });
+        }
+    });
 
     return (
         <Form method="post" action="" onSubmit={onSubmit}>
@@ -37,7 +76,7 @@ const ResetForm = () => {
                     {errors.password && errors.password.message}
                 </FormErrorMessage>
             </FormControl>
-            <Button type="submit" size="lg" width="full" marginY="5" color="black">비밀번호 재설정</Button>
+            <Button isLoading={isSubmitting} type="submit" size="lg" width="full" marginY="5" color="black">비밀번호 재설정</Button>
         </Form>
     )
 }
