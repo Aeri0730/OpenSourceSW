@@ -5,12 +5,12 @@ type CopyButtonType = {
 }
 
 const CopyButton = ({ url }: CopyButtonType) => {
-    const { setValue } = useClipboard("");
+    const { onCopy } = useClipboard(url);
 
     const toast = useToast();
 
-    const copyAndAlert = (url: string) => {
-        setValue(url);
+    const copyAndAlert = () => {
+        onCopy();
 
         toast({
             title: "링크 복사",
@@ -22,7 +22,7 @@ const CopyButton = ({ url }: CopyButtonType) => {
     }
 
     return (
-        <Button size="lg" w="full" onClick={() => { copyAndAlert(url) }}>
+        <Button size="lg" w="full" onClick={() => { copyAndAlert() }}>
             트리에 초대하기
         </Button>
     )
