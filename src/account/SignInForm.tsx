@@ -1,5 +1,5 @@
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { Button, Center, FormControl, FormErrorMessage, FormLabel, IconButton, Input, InputGroup, InputRightAddon, InputRightElement, Link, useToast } from "@chakra-ui/react";
+import { EmailIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { Button, FormControl, FormErrorMessage, FormLabel, Icon, IconButton, Input, InputGroup, InputRightAddon, InputRightElement, Link, useToast } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -91,10 +91,8 @@ const SignInForm = () => {
                     {errors.password && errors.password.message}
                 </FormErrorMessage>
             </FormControl>
-            <Button isLoading={isSubmitting} type="submit" size="lg" width="full" marginY="5" color="black">로그인</Button>
-            <Center>
-                <Link as={RouterLink} fontSize="16px" color="whiteAlpha.700" style={{ textDecoration: "none" }} to="/auth">회원가입 또는 계정 찾기</Link>
-            </Center>
+            <Button isLoading={isSubmitting} type="submit" size="lg" width="full" marginY="1" color="black">로그인</Button>
+            <Button leftIcon={<EmailIcon />} as={RouterLink} to="/auth" size="lg" width="full" marginY="1" bgColor="#1AADA6" _hover={{ bgColor: "#269993" }}>회원가입 또는 계정 찾기</Button>
         </Form>
     )
 }
