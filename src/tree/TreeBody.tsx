@@ -61,7 +61,7 @@ const TreeBody = ({ decorations }: TreeBodyType) => {
     const { height } = useWindowSize();
     const treeHeight = height / 100 * 57;
 
-    const paginator = useMemo(() => paginate(decorations, 4), [decorations]);
+    const paginator = useMemo(() => paginate(decorations, 3), [decorations]);
 
     return (
         <Flex bgImage={treeImage} h={treeHeight} bgPos="center" bgSize="contain" bgRepeat="no-repeat" align="center" justify="space-between">
@@ -73,10 +73,10 @@ const TreeBody = ({ decorations }: TreeBodyType) => {
                 icon={<ArrowLeftIcon />}
             />
             <Flex h="85%" direction="column" justify="space-between" align="center">
-                <Flex flex={1} direction="column" justify="space-between" align="center">
+                <Flex flex={1} direction="column" justify="space-around" align="center">
                     {
                         decorate(paginator.page(pageIndex), paginator.height).lines.map((value, index) => (
-                            <HStack key={index} spacing={7}>
+                            <HStack key={index} gap={5}>
                                 {value.map(item => <Decoration key={item.idx} idx={item.idx} imageIdx={item.imageIdx} nickname={item.nickname} />)}
                             </HStack>
                         ))
