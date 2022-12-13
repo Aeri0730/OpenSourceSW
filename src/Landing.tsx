@@ -64,10 +64,12 @@ const Landing = () => {
                             <ModalBody>
                                 <Flex direction="column" gap={5} align="center">
                                     <Link
+                                        isExternal
                                         href="https://www.freepik.com/free-vector/big-set-christmas-tree-design-different-layout_32528965.htm"
                                         color="brand.nightSky"
                                     >트리 이미지</Link>
                                     <Link
+                                        isExternal
                                         href="https://www.vecteezy.com/vector-art/14484834-eco-rustic-interior-living-room-in-minimal-style"
                                         color="brand.nightSky"
                                     >트리 배경 이미지</Link>
