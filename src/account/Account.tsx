@@ -1,4 +1,4 @@
-import { Center, Stack, Text } from "@chakra-ui/react"
+import { Center, Flex, Stack, Text } from "@chakra-ui/react"
 import { useWindowSize } from "../useWindowSize";
 
 import AuthForm from "./AuthForm";
@@ -20,9 +20,11 @@ const Account = ({ pageType }: AccountPageType) => {
     return (
         <Center h={height} color="white" bgGradient="linear(to-tr, blackAlpha.900, blackAlpha.800)">
             <Stack textStyle="landing" spacing="10" px="5">
-                <Center>
+                <Flex direction="column" gap={1} justify="center" align="center">
                     <Text textStyle="logo" fontSize={["4xl", "5xl"]}>GNU-MAS Tree</Text>
-                </Center>
+                    <Text fontSize="lg">본 서비스는 경상국립대학교 학생들의 비공식 프로젝트입니다.</Text>
+                    <Text fontSize="lg">가입 후 서비스 이용이 가능합니다.</Text>
+                </Flex>
                 {
                     pageType === "SignIn" ? <SignInForm /> :
                         pageType === "Auth" ? <AuthForm /> :
