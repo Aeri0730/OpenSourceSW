@@ -70,7 +70,7 @@ const Decoration = ({ idx, nickname, imageIdx }: DecorationType) => {
 
     return (
         <VStack>
-            <IconButton aria-label="Decoration" bgColor="transparent" _hover={{ bgColor: "transparent" }} onClick={onClick} icon={
+            <IconButton aria-label="Decoration" bgColor="transparent" _focus={{ bgColor: "transparent" }} _hover={{ bgColor: "transparent" }} onClick={onClick} icon={
                 <Image boxSize={["52px", "66px"]} src={ornament(imageIdx)} />
             } />
             <Text fontSize={["18px", "24px"]}>{nickname}</Text>

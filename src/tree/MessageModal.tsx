@@ -1,5 +1,4 @@
 import { Button, Card, CardBody, CardFooter, CardHeader, chakra, Flex, Image, Modal, ModalBody, ModalContent, ModalFooter, ModalOverlay } from "@chakra-ui/react"
-import { isValidMotionProp, motion, useTransform } from "framer-motion"
 import { useAtomValue } from "jotai"
 
 import bgImage from "../assets/letter-background.jpg"
@@ -22,8 +21,6 @@ type MessageModalType = {
 
 const MessageModal = ({ isOpen, onClose, detail }: MessageModalType) => {
     const user = useAtomValue(userAtom);
-
-    console.log(detail);
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} motionPreset="slideInBottom" isCentered>

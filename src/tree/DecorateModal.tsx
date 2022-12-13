@@ -7,6 +7,7 @@ import { createDecoration } from "../backend/Backend";
 import { decoAtom, decoMessageAtom, decoNicknameAtom, decoTypeAtom } from "../backend/Tree";
 import { userAtom } from "../backend/User";
 import DecorationCard from "./DecorationCard";
+
 type DecorateModalType = {
     isOpen: boolean
     onClose: () => void
@@ -14,8 +15,12 @@ type DecorateModalType = {
 
 export const progressAtom = atom(0);
 
+const isSubmittingAtom = atom(false);
+
 const DecorateModal = ({ isOpen, onClose }: DecorateModalType) => {
     const [progress, setProgress] = useAtom(progressAtom);
+
+    const [isSubmitting, setIsSubmitting] = useAtom(isSubmittingAtom);
 
     const [deco, setDeco] = useAtom(decoAtom);
     const setDecotype = useSetAtom(decoTypeAtom);
@@ -39,6 +44,8 @@ const DecorateModal = ({ isOpen, onClose }: DecorateModalType) => {
     }
 
     const onSubmit = async () => {
+        setIsSubmitting(true);
+
         try {
             const createDecorateResponse = await createDecoration(parseInt(index!), user.jwt, deco, nickname, message);
 
@@ -62,6 +69,8 @@ const DecorateModal = ({ isOpen, onClose }: DecorateModalType) => {
                     isClosable: true
                 });
             }
+
+            setIsSubmitting(false);
         }
         catch {
             toast({
@@ -71,6 +80,8 @@ const DecorateModal = ({ isOpen, onClose }: DecorateModalType) => {
                 duration: 3000,
                 isClosable: true
             });
+            
+            setIsSubmitting(false);
         }
     }
 
@@ -86,7 +97,7 @@ const DecorateModal = ({ isOpen, onClose }: DecorateModalType) => {
                 </ModalBody>
                 <ModalFooter>
                     {
-                        progress === 2 ? <Button w="full" mb={3} onClick={onSubmit}>전송</Button> :
+                        progress === 2 ? <Button isLoading={isSubmitting} w="full" mb={3} onClick={onSubmit}>전송</Button> :
                             <Button w="full" mb={3} onClick={() => setProgress(Math.min(progress + 1, 2))}>다음</Button>
                     }
                 </ModalFooter>

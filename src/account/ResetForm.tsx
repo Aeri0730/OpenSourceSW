@@ -16,7 +16,7 @@ const ResetForm = () => {
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
 
-    const { handleSubmit, register, formState: { errors } } = useForm<ResetFormType>();
+    const { handleSubmit, register, formState: { errors, isSubmitting } } = useForm<ResetFormType>();
 
     const navigate = useNavigate();
 
@@ -76,7 +76,7 @@ const ResetForm = () => {
                     {errors.password && errors.password.message}
                 </FormErrorMessage>
             </FormControl>
-            <Button type="submit" size="lg" width="full" marginY="5" color="black">비밀번호 재설정</Button>
+            <Button isLoading={isSubmitting} type="submit" size="lg" width="full" marginY="5" color="black">비밀번호 재설정</Button>
         </Form>
     )
 }

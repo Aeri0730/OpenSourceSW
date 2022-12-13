@@ -23,7 +23,7 @@ const SignInForm = () => {
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
 
-    const { handleSubmit, register, formState: { errors } } = useForm<SignInFormData>();
+    const { handleSubmit, register, formState: { errors, isSubmitting } } = useForm<SignInFormData>();
 
     const navigate = useNavigate();
 
@@ -91,7 +91,7 @@ const SignInForm = () => {
                     {errors.password && errors.password.message}
                 </FormErrorMessage>
             </FormControl>
-            <Button type="submit" size="lg" width="full" marginY="5" color="black">로그인</Button>
+            <Button isLoading={isSubmitting} type="submit" size="lg" width="full" marginY="5" color="black">로그인</Button>
             <Center>
                 <Link as={RouterLink} fontSize="16px" color="whiteAlpha.700" style={{ textDecoration: "none" }} to="/auth">회원가입 또는 계정 찾기</Link>
             </Center>

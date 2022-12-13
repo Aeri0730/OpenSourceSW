@@ -12,7 +12,7 @@ const CodeForm = () => {
     const [code, setCode] = useState("");
     const handleCodeInput = (e: React.ChangeEvent<HTMLInputElement>) => setCode(e.target.value);
 
-    const { handleSubmit, register, formState: { errors } } = useForm<CodeFormType>();
+    const { handleSubmit, register, formState: { errors, isSubmitting } } = useForm<CodeFormType>();
 
     const navigate = useNavigate();
 
@@ -69,7 +69,7 @@ const CodeForm = () => {
                         {errors.code && errors.code.message}
                     </FormErrorMessage>
                 </FormControl>
-                <Button type="submit" size="lg" width="full" marginY="5" color="black">인증번호 확인</Button>
+                <Button isLoading={isSubmitting} type="submit" size="lg" width="full" marginY="5" color="black">인증번호 확인</Button>
             </Form>
         </>
     )

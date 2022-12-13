@@ -20,7 +20,7 @@ const SignUpForm = () => {
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
     
-    const { handleSubmit, register, formState: { errors } } = useForm<SignUpFormData>();
+    const { handleSubmit, register, formState: { errors, isSubmitting } } = useForm<SignUpFormData>();
 
     const navigate = useNavigate();
 
@@ -91,7 +91,7 @@ const SignUpForm = () => {
                     {errors.password && errors.password.message}
                 </FormErrorMessage>
             </FormControl>
-            <Button type="submit" size="lg" width="full" marginY="5" color="black">회원가입</Button>
+            <Button isLoading={isSubmitting} type="submit" size="lg" width="full" marginY="5" color="black">회원가입</Button>
         </Form>
     )
 }

@@ -12,7 +12,7 @@ const AuthForm = () => {
     const [email, setEmail] = useState("");
     const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
 
-    const { handleSubmit, register, formState: { errors } } = useForm<AuthFormData>();
+    const { handleSubmit, register, formState: { errors, isSubmitting } } = useForm<AuthFormData>();
 
     const navigate = useNavigate();
 
@@ -60,7 +60,7 @@ const AuthForm = () => {
                     {errors.id && errors.id.message}
                 </FormErrorMessage>
             </FormControl>
-            <Button type="submit" size="lg" width="full" marginY="5" color="black">인증번호 요청</Button>
+            <Button isLoading={isSubmitting} type="submit" size="lg" width="full" marginY="5" color="black">인증번호 요청</Button>
         </Form>
     )
 }

@@ -40,7 +40,7 @@ const TreePage = () => {
         <Box bgImage={bgImage} bgPos="center" bgSize="cover">
             <Flex h={height} textStyle="tree" direction="column">
                 <Flex w={width} h="64px" bgColor="white" px={5} direction="row" align="center">
-                    <Text textStyle="logo" fontSize={["24px", "32px"]} color="brand.santaSock">GNU-MAS <Text as="span" color="brand.christmasTree">Tree</Text></Text>
+                    <Text as={Link} to={"/"} textStyle="logo" fontSize={["24px", "32px"]} color="brand.santaSock">GNU-MAS <Text as="span" color="brand.christmasTree">Tree</Text></Text>
                     <Spacer />
                     <Menu>
                         <MenuButton as={IconButton} bgColor="white" aria-label="Account menu" icon={<HamburgerIcon />} />

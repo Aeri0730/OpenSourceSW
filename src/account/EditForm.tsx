@@ -26,7 +26,7 @@ const EditForm = () => {
 
     const toast = useToast();
 
-    const { handleSubmit, reset, register, formState: { errors } } = useForm<EditFormType>();
+    const { handleSubmit, reset, register, formState: { errors, isSubmitting } } = useForm<EditFormType>();
 
     const navigate = useNavigate();
 
@@ -35,6 +35,14 @@ const EditForm = () => {
             const editResponse = await editUser(user.userIdx, user.jwt, data.nickname, data.password);
 
             if (editResponse?.isSuccess) {
+                toast({
+                    title: "수정 성공!",
+                    description: "회원 정보를 성공적으로 수정했습니다!",
+                    status: "success",
+                    duration: 3000,
+                    isClosable: true
+                });
+
                 navigate(`/trees/${user.userIdx}`, { replace: true });
             }
             else {
@@ -128,7 +136,7 @@ const EditForm = () => {
                     {errors.password && errors.password.message}
                 </FormErrorMessage>
             </FormControl>
-            <Button type="submit" size="lg" width="full" marginY="5" color="black">정보 수정</Button>
+            <Button isLoading={isSubmitting} type="submit" size="lg" width="full" marginY="5" color="black">정보 수정</Button>
         </Form>
     )
 }

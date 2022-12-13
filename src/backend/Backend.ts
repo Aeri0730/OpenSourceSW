@@ -1,8 +1,8 @@
 import { DecorationDetailType } from "../tree/MessageModal";
-import { Decoration, Tree } from "./Tree";
+import { Decoration } from "./Tree";
 import { User } from "./User";
 
-export const url = "https://dongho.loca.lt";
+export const url = "https://donghodevelop.shop";
 
 interface APIResponse {
     isSuccess: boolean
