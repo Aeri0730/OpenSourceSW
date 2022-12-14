@@ -2,7 +2,7 @@ import { DecorationDetailType } from "../tree/MessageModal";
 import { Decoration } from "./Tree";
 import { User } from "./User";
 
-export const url = "https://donghodevelop.shop/api";
+export const url = "https://gnumas-tree.site/api";
 
 interface APIResponse {
     isSuccess: boolean
