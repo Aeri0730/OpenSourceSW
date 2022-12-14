@@ -2,7 +2,7 @@ import { DecorationDetailType } from "../tree/MessageModal";
 import { Decoration } from "./Tree";
 import { User } from "./User";
 
-export const url = "https://donghodevelop.shop";
+export const url = "https://donghodevelop.shop/api";
 
 interface APIResponse {
     isSuccess: boolean
@@ -119,7 +119,7 @@ export const authWithEmail = async (id: string): Promise<APIResponse | undefined
         body: JSON.stringify(body)
     }
 
-    const response = await fetch(`${url}/api/send-email`, config);
+    const response = await fetch(`${url}/send-email`, config);
 
     const json = await response.json();
 
@@ -145,7 +145,7 @@ export const checkCode = async (authNum: number): Promise<CodeResponse | undefin
         body: JSON.stringify(body)
     }
 
-    const response = await fetch(`${url}/api/send-email/check`, config);
+    const response = await fetch(`${url}/send-email/check`, config);
 
     const json = await response.json();
 
