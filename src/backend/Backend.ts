@@ -2,7 +2,7 @@ import { DecorationDetailType } from "../tree/MessageModal";
 import { Decoration } from "./Tree";
 import { User } from "./User";
 
-export const url = "https://gnumas-tree.site/api";
+export const url = "http://192.168.131.148:8080";
 
 interface APIResponse {
     isSuccess: boolean
@@ -14,9 +14,9 @@ interface UserResponse extends APIResponse {
     result: User
 }
 
-export const fetchUser = async (id: string, password: string): Promise<UserResponse | undefined> => {
+export const fetchUser = async (email: string, password: string): Promise<UserResponse | undefined> => {
     const body = {
-        id: id,
+        email: email,
         password: password
     }
 
@@ -29,7 +29,7 @@ export const fetchUser = async (id: string, password: string): Promise<UserRespo
         body: JSON.stringify(body)
     }
 
-    const response = await fetch(`${url}/sign-in`, config);
+    const response = await fetch(`${url}/loginAPI/login`, config);
 
     const json = await response.json();
 
@@ -104,14 +104,13 @@ export const createDecoration = async (userIdx: number, jwt: string, imageIdx: n
     return json as APIResponse;
 }
 
-export const authWithEmail = async (id: string): Promise<APIResponse | undefined> => {
+export const authWithEmail = async (email: string): Promise<APIResponse | undefined> => {
     const body = {
-        id: id
+        email: email
     }
 
     const config: RequestInit = {
         method: "POST",
-        mode: "cors",
         headers: {
             "Content-Type": "application/json",
         },
@@ -119,7 +118,7 @@ export const authWithEmail = async (id: string): Promise<APIResponse | undefined
         body: JSON.stringify(body)
     }
 
-    const response = await fetch(`${url}/send-email`, config);
+    const response = await fetch(`${url}/new`, config);
 
     const json = await response.json();
 

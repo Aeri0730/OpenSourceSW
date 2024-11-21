@@ -71,7 +71,7 @@ const SignInForm = () => {
                     <Input type="text" {...register("id", {
                         required: "이메일은 꼭 입력해주세요"
                     })} value={id || ""} onChange={handleIdInput} />
-                    <InputRightAddon color="black">@gnu.ac.kr</InputRightAddon>
+                    <InputRightAddon color="black">@kyonggi.ac.kr</InputRightAddon>
                 </InputGroup>
                 <FormErrorMessage>
                     {errors.id && errors.id.message}
