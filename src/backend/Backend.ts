@@ -2,7 +2,7 @@ import { DecorationDetailType } from "../tree/MessageModal";
 import { Decoration } from "./Tree";
 import { User } from "./User";
 
-export const url = "http://192.168.131.148:8080";
+export const url = "http://127.0.0.1:8080";
 
 interface APIResponse {
     isSuccess: boolean
@@ -111,6 +111,7 @@ export const authWithEmail = async (email: string): Promise<APIResponse | undefi
 
     const config: RequestInit = {
         method: "POST",
+        mode: "cors",
         headers: {
             "Content-Type": "application/json",
         },
@@ -118,7 +119,7 @@ export const authWithEmail = async (email: string): Promise<APIResponse | undefi
         body: JSON.stringify(body)
     }
 
-    const response = await fetch(`${url}/new`, config);
+    const response = await fetch(`${url}/registerAPI/new`, config);
 
     const json = await response.json();
 
